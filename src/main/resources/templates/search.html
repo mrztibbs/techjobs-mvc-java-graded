@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
+
+    <!-- Bootstrap stylesheets and script -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
 </head>
 <body>
 
@@ -39,23 +45,30 @@
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
     <table class="job-listing" th:each="job : ${jobs}">
         <tr>
+            <td>ID</td>
             <td th:text="${job.id}"></td>
         </tr>
         <tr>
+            <td>Name</td>
             <td th:text="${job.name}"></td>
         </tr>
         <tr>
+            <td>Employer</td>
             <td th:text="${job.employer}"></td>
         </tr>
         <tr>
+            <td>Location</td>
             <td th:text="${job.location}"></td>
         </tr>
         <tr>
+            <td>ID</td>
             <td th:text="${job.positionType}"></td>
         </tr>
         <tr>
+            <td>Skill</td>
             <td th:text="${job.coreCompetency}"></td>
-        </tr>    </table>
+        </tr>
+    </table>
 </div>
 
 </body>
