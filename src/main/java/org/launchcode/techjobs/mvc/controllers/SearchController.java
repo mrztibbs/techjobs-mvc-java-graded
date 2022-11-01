@@ -31,13 +31,13 @@ public class SearchController {
             jobs = JobData.findAll();
         }
 
-        if (searchType.toLowerCase() != "all"){
+        if (!searchType.toLowerCase().equals("all")){
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
 
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns", columnChoices);
-        return "/search/results";
+        return "search";
     }
 
 }
