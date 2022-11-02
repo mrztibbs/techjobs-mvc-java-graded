@@ -26,17 +26,21 @@ public class SearchController {
 
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
-        ArrayList<Job> jobs = null;
-        if (searchType.toLowerCase().equals("all")) {
-            jobs = JobData.findAll();
-        }
+        ArrayList<Job> jobs;
 
-        if (!searchType.toLowerCase().equals("all")){
-            jobs = JobData.findByColumnAndValue(searchType, searchTerm);
-        }
+        try {
+            if (searchType.toLowerCase().trim().equals("all")) {
+                jobs = JobData.findAll();
+            } else {
+                jobs = JobData.findByColumnAndValue(searchType, searchTerm);
+            }
 
-        model.addAttribute("jobs", jobs);
-        model.addAttribute("columns", columnChoices);
+            model.addAttribute("jobs", jobs);
+            model.addAttribute("columns", columnChoices);
+        } catch (Exception e) {
+            Error error = new Error ("Sorry! No jobs found!");
+            throw error;
+        }
         return "search";
     }
 
