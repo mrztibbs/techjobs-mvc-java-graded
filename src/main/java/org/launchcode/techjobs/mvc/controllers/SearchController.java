@@ -4,7 +4,10 @@ import org.launchcode.techjobs.mvc.models.Job;
 import org.launchcode.techjobs.mvc.models.JobData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -27,12 +30,12 @@ public class SearchController {
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         ArrayList<Job> jobs;
-
+        JobData jobData = new JobData();
         try {
-            if (searchType.toLowerCase().trim().equals("all")) {
-                jobs = JobData.findAll();
+            if (searchType.toLowerCase().trim().equals("all") && searchTerm.toLowerCase().trim().equals("all")) {
+                jobs = jobData.findAll();
             } else {
-                jobs = JobData.findByColumnAndValue(searchType, searchTerm);
+                jobs = jobData.findByColumnAndValue(searchType, searchTerm);
             }
 
             model.addAttribute("jobs", jobs);
