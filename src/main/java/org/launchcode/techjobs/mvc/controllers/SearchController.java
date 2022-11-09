@@ -30,6 +30,7 @@ public class SearchController {
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         ArrayList<Job> jobs;
+        String title = "Jobs With All: " + searchTerm;
         try {
             if (searchType.toLowerCase().trim().equals("all") && searchTerm.toLowerCase().trim().equals("all") || searchTerm.equals("")) {
                 jobs = JobData.findAll();
@@ -37,6 +38,7 @@ public class SearchController {
                 jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             }
 
+            model.addAttribute("title", title);
             model.addAttribute("jobs", jobs);
             model.addAttribute("columns", columnChoices);
         } catch (Exception e) {
