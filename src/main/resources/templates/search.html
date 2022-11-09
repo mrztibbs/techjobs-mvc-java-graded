@@ -43,8 +43,7 @@
     <hr />
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
-    <table class="job-listing">
-        <tbody th:each="job : ${jobs}">
+    <table class="job-listing" th:each="job : ${jobs}">
         <tr>
             <td>ID</td>
             <td th:text="${job.id}"></td>
@@ -69,7 +68,6 @@
             <td>Skill</td>
             <td th:text="${job.coreCompetency}"></td>
         </tr>
-        </tbody>
     </table>
 </div>
 
