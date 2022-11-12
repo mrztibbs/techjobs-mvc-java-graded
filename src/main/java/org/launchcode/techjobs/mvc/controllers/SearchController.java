@@ -37,9 +37,10 @@ public class SearchController {
             //findAll if the searchType is all and searchTerm is all/blank
             if (searchType.toLowerCase().trim().equals("all") && searchTerm.toLowerCase().trim().equals("all") ||
                     searchTerm.equals("")) {
+                jobs = JobData.findAll();
                 title = "Jobs With " + columnChoices.get(searchType) + ": All";
                 model.addAttribute("title", title);
-                model.addAttribute("jobs", JobData.findAll());
+                model.addAttribute("jobs", jobs);
             } else {
                 jobs = JobData.findByColumnAndValue(searchType, searchTerm);
                 title = "Jobs With " + columnChoices.get(searchType) + ": " + searchTerm;
